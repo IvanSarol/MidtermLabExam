@@ -1,0 +1,64 @@
+import 'package:flutter/material.dart'; 
+
+class Counter extends StatelessWidget { // Nagde-define ng stateless widget na tinatawag na counter
+  final int counter;  
+  final VoidCallback onIncrement;  
+
+  const Counter({ // Constructor para sa counter widget
+    super.key,
+    required this.counter,  
+    required this.onIncrement,  
+  });
+
+  @override
+  Widget build(BuildContext context) {  // Nagdi-describe ng widget tree para sa counter widget
+    return Row(  
+      mainAxisAlignment: MainAxisAlignment.center,  
+      children: <Widget>[  
+        ElevatedButton(  
+          onPressed: onIncrement,  
+          child: const Text('Increment'),  
+        ),
+        const SizedBox(width: 16), 
+        Text('Count: $counter'),
+      ],
+    );
+  }
+}
+
+class CounterParent extends StatefulWidget {  
+  const CounterParent({super.key});  
+
+  @override
+  _CounterParentState createState() => _CounterParentState();  
+}
+
+class _CounterParentState extends State<CounterParent> { 
+  int _counter = 0;  
+
+  void _incrementCounter() {  
+    setState(() {  
+      _counter++;  
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {  
+    return Center( 
+      child: Counter(  
+        counter: _counter,  
+        onIncrement: _incrementCounter, 
+      ), 
+    );
+  }
+}
+
+void main() { // Main entry point ng application
+  runApp(  
+    const MaterialApp(  
+      home: Scaffold(  
+      ),
+    ),
+  );
+}
+
